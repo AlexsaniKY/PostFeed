@@ -6,14 +6,14 @@ namespace PostFeed.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<PostFeed.Infrastructure.AppDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<PostFeed.Infrastructure.PostFeedDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(PostFeed.Infrastructure.AppDbContext context)
+        protected override void Seed(PostFeed.Infrastructure.PostFeedDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

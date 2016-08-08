@@ -7,16 +7,16 @@ using System.Web;
 
 namespace PostFeed.Infrastructure
 {
-    public class AppDbContext: DbContext
+    public class PostFeedDbContext: DbContext
     {
-        public AppDbContext(): base("AppDbContext")
+        public PostFeedDbContext(): base("PostFeedDbContext")
         {
-            Database.SetInitializer<AppDbContext>(null);
+            Database.SetInitializer<PostFeedDbContext>(null);
         }
 
-        public static AppDbContext Create()
+        public static PostFeedDbContext Create()
         {
-            return new AppDbContext();
+            return new PostFeedDbContext();
         }
 
         public DbSet<Post> Posts { get; set; }
