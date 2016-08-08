@@ -7,7 +7,7 @@ namespace PostFeed.Domain
         public int Id { get; set; }
         public bool Active { get; set; }
 
-        string Name { get; set; }
+        public string Name { get; set; }
 
         ICollection<Post> Posts { get; set; }
 

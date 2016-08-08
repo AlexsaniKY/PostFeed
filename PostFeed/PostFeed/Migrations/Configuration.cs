@@ -1,5 +1,6 @@
 namespace PostFeed.Migrations
 {
+    using Domain;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -26,6 +27,17 @@ namespace PostFeed.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.Authors.AddOrUpdate(
+                a => a.Id,
+                new Author { Id = 1, Active = true, Name = "The Great Bob" }
+                );
+
+            context.Posts.AddOrUpdate(
+                p => p.Id,
+                new Post { Id = 1, Active = true, AuthorId = 1, BodyText = "I ate food today", TimePosted = DateTime.Now, Title = "Food" }
+                );
+
         }
     }
 }
