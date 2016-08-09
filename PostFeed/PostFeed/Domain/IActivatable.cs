@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PostFeed.Domain
 {
-    interface IActivatable
+    public interface IActivatable
     {
         bool Active { get; set; }
-        ICollection<> DeleteCascade();
+        void DeleteCascade();
     }
 }

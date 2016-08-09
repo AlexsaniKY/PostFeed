@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostFeed.Domain
 {
-    interface IDbEntity
+    public interface IDbEntity
     {
         int Id { get; set; }
     }

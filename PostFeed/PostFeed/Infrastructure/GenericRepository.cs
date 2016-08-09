@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PostFeed.Domain;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
-using System.Web;
+
 
 namespace PostFeed.Infrastructure
 {

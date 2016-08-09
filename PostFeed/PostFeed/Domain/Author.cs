@@ -11,13 +11,12 @@ namespace PostFeed.Domain
 
         ICollection<Post> Posts { get; set; }
 
-        ICollection<> DeleteCascade()
+        public void DeleteCascade()
         {
             foreach(Post p in Posts)
             {
                 p.Active = false;
             }
-            return Posts;
         }
     }
 }
