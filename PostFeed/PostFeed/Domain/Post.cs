@@ -19,6 +19,6 @@ namespace PostFeed.Domain
         [ForeignKey("AuthorId")]
         public Author PostCreator { get; set; }
 
-        void DeleteCascade() { }
+        public void DeleteCascade() { }
     }
 }
