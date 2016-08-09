@@ -9,5 +9,6 @@ namespace PostFeed.Domain
     interface IActivatable
     {
         bool Active { get; set; }
+        ICollection<> DeleteCascade();
     }
 }

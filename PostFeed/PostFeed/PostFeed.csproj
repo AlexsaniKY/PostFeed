@@ -164,6 +164,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\GenericRepository.cs" />
     <Compile Include="Infrastructure\PostFeedDbContext.cs" />
     <Compile Include="Migrations\201608081930289_InitialMigration.cs" />
     <Compile Include="Migrations\201608081930289_InitialMigration.Designer.cs">

@@ -18,5 +18,7 @@ namespace PostFeed.Domain
         public int AuthorId { get; set; }
         [ForeignKey("AuthorId")]
         public Author PostCreator { get; set; }
+
+        ICollection<> DeleteCascade() { }
     }
 }
