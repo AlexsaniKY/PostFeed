@@ -80,7 +80,7 @@ namespace PostFeed.Controllers
                 return NotFound();
             }
 
-            postServices.Delete(id);
+            postServices.Delete(post);
 
             return Ok(post);
         }
