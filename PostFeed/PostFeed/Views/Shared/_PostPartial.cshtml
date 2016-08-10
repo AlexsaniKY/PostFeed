@@ -1,6 +1,6 @@
 ﻿@model PostFeed.Domain.Post
 <div class="col-lg-offset-3 col-lg-6">
-    <h1 class="text-center">@Html.DisplayFor(model => model.Title) <small>@Html.DisplayFor(model => model.PostCreator.Name)</small></h1>
+    <h3 class="text-left">@Html.DisplayFor(model => model.Title) <small class="text-center">@Html.DisplayFor(model => model.PostCreator.Name)</small></h3>
     <p class="text-center well"> @Html.DisplayFor(model => model.BodyText)</p>
 </div>
 @*https://cmatskas.com/update-an-mvc-partial-view-with-ajax/*@

@@ -30,12 +30,15 @@ namespace PostFeed.Migrations
 
             context.Authors.AddOrUpdate(
                 a => a.Id,
-                new Author { Id = 1, Active = true, Name = "The Great Bob" }
+                new Author { Id = 1, Active = true, Name = "The Great Bob" },
+                new Author { Id = 2, Active = true, Name = "Not Batman"}
                 );
 
             context.Posts.AddOrUpdate(
                 p => p.Id,
-                new Post { Id = 1, Active = true, AuthorId = 1, BodyText = "I ate food today", TimePosted = DateTime.Now, Title = "Food" }
+                new Post { Id = 1, Active = true, AuthorId = 1, BodyText = "I ate food today", TimePosted = DateTime.Now, Title = "Food" },
+                new Post { Id = 2, Active = true, AuthorId = 1, BodyText = "I took a long walk, probably.", TimePosted = DateTime.Now.Subtract(new TimeSpan(1,0,0)), Title = "Sports"},
+                new Post { Id = 3, Active = true, AuthorId = 2, BodyText = "I didn't beat up villains on Main St.  Definitely wasn't me.", TimePosted = DateTime.Now.Subtract(new TimeSpan(2, 30, 0)), Title = "Normal People Stuff" }
                 );
 
         }
