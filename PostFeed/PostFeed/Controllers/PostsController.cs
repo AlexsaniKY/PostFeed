@@ -22,6 +22,7 @@ namespace PostFeed.Controllers
         public IQueryable<Post> GetPosts()
         {
             return postServices.GetAll();
+            //return postServices.GetAll().Where(p=> p.TimePosted >= DateTime.Now.Subtract(new TimeSpan(24,0,0)));
         }
 
         // GET: api/Posts/5

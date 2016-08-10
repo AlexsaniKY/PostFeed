@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PostFeed.Views.ViewModels;
+using System.Collections.Generic;
 
 namespace PostFeed.Domain
 {
@@ -9,7 +10,7 @@ namespace PostFeed.Domain
 
         public string Name { get; set; }
 
-        ICollection<Post> Posts { get; set; }
+        public ICollection<Post> Posts { get; set; }
 
         public void DeleteCascade()
         {
@@ -17,6 +18,22 @@ namespace PostFeed.Domain
             {
                 p.Active = false;
             }
+        }
+
+        public Author(){}
+        public Author(int id, bool active, string name, ICollection<Post> posts)
+        {
+            Id = id;
+            Active = active;
+            Name = name;
+            Posts = posts;
+        }
+        public Author(AuthorViewModel author)
+        {
+            Id = author.Id;
+            Active = author.Active;
+            Name = author.Name;
+            Posts = author.Posts;
         }
     }
 }

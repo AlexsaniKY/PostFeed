@@ -1,0 +1,5 @@
+﻿@model PostFeed.Domain.Post
+<div class="col-lg-offset-3 col-lg-6">
+    <h1 class="text-center">@Html.DisplayFor(model => model.Title) <small>@Html.DisplayFor(model => model.PostCreator.Name)</small></h1>
+    <p class="text-center"> @Html.DisplayFor(model => model.BodyText)</p>
+</div>

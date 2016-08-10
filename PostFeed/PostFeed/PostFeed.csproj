@@ -192,6 +192,7 @@
     <Compile Include="Services\AuthorServices.cs" />
     <Compile Include="Services\GenericServices.cs" />
     <Compile Include="Services\PostServices.cs" />
+    <Compile Include="Views\ViewModels\AuthorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -230,6 +231,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_PostPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
