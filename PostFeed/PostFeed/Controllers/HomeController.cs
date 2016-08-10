@@ -14,19 +14,24 @@ namespace PostFeed.Controllers
     {
         internal AuthorServices authorServices = new AuthorServices();
         internal PostServices postServices = new PostServices();
+
         public ActionResult Index()
         {
             return View(GetRecentPosts());
         }
 
-        private ICollection<Post> GetRecentPosts()
+        private ICollection<PostViewModel> GetRecentPosts()
         {
             var allposts = postServices.GetAll();
-            foreach(Post p in allposts)
+            List<PostViewModel> postViewModels = new List<PostViewModel>();
+            PostViewModel postView;
+            foreach (Post p in allposts)
             {
-                p.PostCreator = authorServices.Get(p.AuthorId);
+                postView = new PostViewModel(p);
+                postView.PostCreator = new AuthorViewModel(authorServices.Get(p.AuthorId));
+                postViewModels.Add(postView);
             }
-            return postServices.GetAll().ToList();
+            return postViewModels;
         }
 
 

@@ -1,4 +1,4 @@
-﻿@model ICollection<PostFeed.Domain.Post>
+﻿@model ICollection<PostFeed.Views.ViewModels.PostViewModel>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -10,8 +10,8 @@
 </div>*@
 <body>
 
-    <div class="container-fluid" style="overflow-y:scroll; height:80vh">
-        @foreach (PostFeed.Domain.Post p in Model)
+    <div class="container-fluid" style="overflow-y:auto; height:80vh">
+        @foreach(PostFeed.Views.ViewModels.PostViewModel p in Model)
         {
             @Html.Partial("_PostPartial", p)
         }

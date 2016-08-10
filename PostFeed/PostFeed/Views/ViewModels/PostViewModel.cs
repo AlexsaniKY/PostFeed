@@ -1,32 +1,25 @@
-﻿using PostFeed.Views.ViewModels;
+﻿using PostFeed.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace PostFeed.Domain
+namespace PostFeed.Views.ViewModels
 {
-    public class Post: IActivatable, IDbEntity
+    public class PostViewModel
     {
         [Required]
         public int Id { get; set; }
         public bool Active { get; set; }
-
         public string Title { get; set; }
-        [Required]
         public string BodyText { get; set; }
         public DateTime TimePosted { get; set; }
-
         public int AuthorId { get; set; }
-        [ForeignKey("AuthorId")]
-        public Author PostCreator { get; set; }
+        public AuthorViewModel PostCreator { get; set; }
 
-        public void DeleteCascade() { }
-
-        public Post() { }
-        public Post(PostViewModel post)
+        public PostViewModel() { }
+        public PostViewModel(Post post)
         {
             Id = post.Id;
             Active = post.Active;
@@ -34,6 +27,7 @@ namespace PostFeed.Domain
             BodyText = post.BodyText;
             TimePosted = post.TimePosted;
             AuthorId = post.AuthorId;
+            //PostCreator = new AuthorViewModel(post.PostCreator);
         }
     }
 }

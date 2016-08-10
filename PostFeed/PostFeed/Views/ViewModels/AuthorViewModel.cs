@@ -12,14 +12,17 @@ namespace PostFeed.Views.ViewModels
         public bool Active { get; set; }
 
         public string Name { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<PostViewModel> Posts { get; set; }
         public AuthorViewModel() { }
         public AuthorViewModel(Author author)
         {
             Id = author.Id;
             Active = author.Active;
             Name = author.Name;
-            Posts = author.Posts;
+            Posts = new List<PostViewModel>();
+            //foreach (Post p in author.Posts) {
+            //    Posts.Add(new PostViewModel(p));
+            //}
         }
     }
 }

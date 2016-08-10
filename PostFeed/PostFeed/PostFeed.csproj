@@ -187,12 +187,17 @@
     <Compile Include="Migrations\201608081930289_InitialMigration.Designer.cs">
       <DependentUpon>201608081930289_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608101804165_addedRequiredTags.cs" />
+    <Compile Include="Migrations\201608101804165_addedRequiredTags.Designer.cs">
+      <DependentUpon>201608101804165_addedRequiredTags.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthorServices.cs" />
     <Compile Include="Services\GenericServices.cs" />
     <Compile Include="Services\PostServices.cs" />
     <Compile Include="Views\ViewModels\AuthorViewModel.cs" />
+    <Compile Include="Views\ViewModels\PostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -214,6 +219,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\NewUserForm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -228,8 +234,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_PostPartial.cshtml" />
   </ItemGroup>
@@ -248,6 +252,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608081930289_InitialMigration.resx">
       <DependentUpon>201608081930289_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608101804165_addedRequiredTags.resx">
+      <DependentUpon>201608101804165_addedRequiredTags.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
