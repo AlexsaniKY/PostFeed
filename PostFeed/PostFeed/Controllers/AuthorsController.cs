@@ -5,6 +5,7 @@ using System.Web.Http.Description;
 using PostFeed.Domain;
 using PostFeed.Services;
 using PostFeed.Views.ViewModels;
+using System.Collections.Generic;
 
 namespace PostFeed.Controllers
 {
@@ -13,9 +14,12 @@ namespace PostFeed.Controllers
         private AuthorServices authorServices = new AuthorServices();
 
         // GET: api/Authors
-        public IQueryable<Author> GetAuthors()
+        [HttpGet]
+        [Route("api/Authors")]
+        [ResponseType(typeof(List<Author>))]
+        public List<Author> GetAuthors()
         {
-            return authorServices.GetAll();
+            return authorServices.GetAll().ToList();
         }
 
         // GET: api/Authors/5

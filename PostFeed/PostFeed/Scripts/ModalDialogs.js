@@ -1,12 +1,42 @@
 ﻿//http://jqueryui.com/dialog/#modal-form
 
 $(function () {
+        //dialog and form for creating new user
     var userDialog, userForm,
+        //dialog and form for post creation
         postDialog, postForm,
         name = $("#name"),
-        allFields = $([]).add(name),
+        allUserFields = $([]).add(name),
         tips = $(".validateTips");
 
+    function populateAuthorsList(){
+        $.ajax({
+            type: "GET",
+            url: '/api/Authors',
+            cache: false,
+            success: function (response) {
+                var allAuthors = response;
+                var authorNames = [];
+                for(var i = 0; i< allAuthors.length; i++){
+                    authorNames.push(allAuthors[i].Name);
+                }
+                var htmlselect = document.createElement('select');
+                htmlselect.name = 'Authors';
+                htmlselect.id = 'nameSelectList';
+
+                var option;
+                for (var i = 0; i < authorNames.length; i++) {
+                    option = document.createElement("option");
+                    option.value = authorNames[i];
+                    option.text = authorNames[i];
+                    htmlselect.appendChild(option);
+                }
+
+                $("#nameSelect").text = htmlselect.toString();
+                
+            }
+        });
+    }
     function updateTips(t) {
         tips
             .text(t)
@@ -39,7 +69,7 @@ $(function () {
 
     function addUser() {
         var valid = true;
-        allFields.removeClass("ui-state-error");
+        allUserFields.removeClass("ui-state-error");
 
         valid = valid && checkLength(name, "username", 3, 16);
         valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
@@ -53,7 +83,9 @@ $(function () {
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 cache: false,
-                success: function(response){}
+                success: function (response) {
+                    populateAuthorsList();
+                }
             });
             userDialog.dialog("close");
         }
@@ -77,7 +109,7 @@ $(function () {
             },
             close: function () {
                 postForm[0].reset();
-                allFields.removeClass("ui-state-error");
+                allUserFields.removeClass("ui-state-error");
             }
     });
 
@@ -104,7 +136,7 @@ $(function () {
         },
         close: function () {
             userForm[0].reset();
-            allFields.removeClass("ui-state-error");
+            allUserFields.removeClass("ui-state-error");
         }
     });
 
