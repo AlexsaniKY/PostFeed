@@ -61,7 +61,7 @@ $(function () {
     }
 
     function addPost(){
-
+        postDialog.dialog("close");
     }
 
     postDialog = $("#new-post-form").dialog({
