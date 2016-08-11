@@ -1,7 +1,8 @@
 ﻿//http://jqueryui.com/dialog/#modal-form
 
 $(function () {
-    var dialog, form,
+    var userDialog, userForm,
+        postDialog, postForm,
         name = $("#name"),
         allFields = $([]).add(name),
         tips = $(".validateTips");
@@ -54,12 +55,43 @@ $(function () {
                 cache: false,
                 success: function(response){}
             });
-            dialog.dialog("close");
+            userDialog.dialog("close");
         }
         return valid;
     }
 
-    dialog = $("#dialog-form").dialog({
+    function addPost(){
+
+    }
+
+    postDialog = $("#new-post-form").dialog({
+        autoOpen: false,
+        height: 500,
+        width: 350,
+        modal: true,
+        buttons: {
+            "Create a new Post": addPost,
+            Cancel: function () {
+                postDialog.dialog("close");
+                }
+            },
+            close: function () {
+                postForm[0].reset();
+                allFields.removeClass("ui-state-error");
+            }
+    });
+
+    postForm = postDialog.find("form").on("submit", function (event){
+        event.preventDefault();
+        addPost();
+    });
+
+    $("#newPost").click(function () {
+        postDialog.dialog("open");
+    });
+
+
+    userDialog = $("#new-user-form").dialog({
         autoOpen: false,
         height: 200,
         width: 350,
@@ -67,21 +99,21 @@ $(function () {
         buttons: {
             "Create a new User": addUser,
             Cancel: function () {
-                dialog.dialog("close");
+                userDialog.dialog("close");
             }
         },
         close: function () {
-            form[0].reset();
+            userForm[0].reset();
             allFields.removeClass("ui-state-error");
         }
     });
 
-    form = dialog.find("form").on("submit", function (event) {
+    userForm = userDialog.find("form").on("submit", function (event) {
         event.preventDefault();
         addUser();
     });
 
     $("#newUser").click(function () {
-        dialog.dialog("open");
+        userDialog.dialog("open");
     });
 });

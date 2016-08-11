@@ -9,7 +9,7 @@ namespace PostFeed.Domain
     {
         [Required]
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public bool Active { get; set; }
         [Required]
