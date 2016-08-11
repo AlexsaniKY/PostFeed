@@ -11,6 +11,8 @@ namespace PostFeed.Domain
     public class Post: IActivatable, IDbEntity
     {
         [Required]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public bool Active { get; set; }
 

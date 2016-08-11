@@ -5,12 +5,13 @@ $(function () {
         name = $("#name"),
         allFields = $([]).add(name),
         tips = $(".validateTips");
+
     function updateTips(t) {
         tips
             .text(t)
             .addClass("ui-state-highlight");
         setTimeout(function () {
-            tips.removeClass("ui-state-highlight", 1500);
+            tips.removeClass("ui-state-highlight", 1000);
         }, 500);
     }
 
@@ -41,16 +42,26 @@ $(function () {
 
         valid = valid && checkLength(name, "username", 3, 16);
         valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
-
+        var nameText = name.serialize().split("=")[1];
         if (valid) {
             //use ajax to add the user
+            var data = { Name: nameText, Active: true };
+            $.ajax({
+                type: "POST",
+                url: '/api/Authors',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                cache: false,
+                success: function(response){}
+            });
+            dialog.dialog("close");
         }
         return valid;
     }
 
     dialog = $("#dialog-form").dialog({
         autoOpen: false,
-        height: 400,
+        height: 200,
         width: 350,
         modal: true,
         buttons: {
@@ -70,7 +81,7 @@ $(function () {
         addUser();
     });
 
-    $("#newUser").button().on("click", function () {
+    $("#newUser").click(function () {
         dialog.dialog("open");
     });
 });

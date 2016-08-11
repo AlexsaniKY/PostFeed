@@ -28,10 +28,11 @@ namespace PostFeed.Services
             _repo.SaveChanges();
         }
 
-        public void Add(T newEntity)
+        public int Add(T newEntity)
         {
-            _repo.Add(newEntity);
+            int returnInt =_repo.Add(newEntity);
             _repo.SaveChanges();
+            return returnInt;
         }
 
         public void Delete(int id)

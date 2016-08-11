@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using PostFeed.Domain;
 using PostFeed.Services;
+using PostFeed.Views.ViewModels;
 
 namespace PostFeed.Controllers
 {
@@ -50,17 +51,19 @@ namespace PostFeed.Controllers
         }
 
         // POST: api/Authors
-        [ResponseType(typeof(Author))]
-        public IHttpActionResult PostAuthor(Author author)
+        [HttpPost]
+        [Route("api/Authors")]
+        [ResponseType(typeof(AuthorViewModel))]
+        public IHttpActionResult PostAuthor([FromBody] AuthorViewModel author)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            authorServices.Add(author);
+            int Id = authorServices.Add(new Author(author));
 
-            return CreatedAtRoute("DefaultApi", new { id = author.Id }, author);
+            return CreatedAtRoute("DefaultApi", new {controller= "Authors", id = Id }, author);
         }
 
         // DELETE: api/Authors/5

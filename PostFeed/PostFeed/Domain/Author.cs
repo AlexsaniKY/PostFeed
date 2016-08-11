@@ -1,12 +1,15 @@
 ﻿using PostFeed.Views.ViewModels;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PostFeed.Domain
 {
     public class Author: IActivatable, IDbEntity
     {
         [Required]
+        [Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public bool Active { get; set; }
         [Required]
@@ -38,10 +41,11 @@ namespace PostFeed.Domain
             Active = author.Active;
             Name = author.Name;
             Posts = new List<Post>();
-            foreach(PostViewModel p in author.Posts)
-            {
-                Posts.Add(new Post(p));
-            }
+            if(author.Posts != null)
+                foreach (PostViewModel p in author.Posts)
+                {
+                    Posts.Add(new Post(p));
+                }
         }
     }
 }

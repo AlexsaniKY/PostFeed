@@ -1,6 +1,7 @@
 ﻿using PostFeed.Domain;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,7 @@ namespace PostFeed.Views.ViewModels
     {
         public int Id { get; set; }
         public bool Active { get; set; }
-
+        [Required]
         public string Name { get; set; }
         public ICollection<PostViewModel> Posts { get; set; }
         public AuthorViewModel() { }

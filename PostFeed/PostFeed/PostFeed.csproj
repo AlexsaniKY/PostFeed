@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201608101804165_addedRequiredTags.Designer.cs">
       <DependentUpon>201608101804165_addedRequiredTags.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608110312049_added database generated Keys for Author and Post.cs" />
+    <Compile Include="Migrations\201608110312049_added database generated Keys for Author and Post.Designer.cs">
+      <DependentUpon>201608110312049_added database generated Keys for Author and Post.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthorServices.cs" />
@@ -255,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608101804165_addedRequiredTags.resx">
       <DependentUpon>201608101804165_addedRequiredTags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608110312049_added database generated Keys for Author and Post.resx">
+      <DependentUpon>201608110312049_added database generated Keys for Author and Post.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
