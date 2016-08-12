@@ -1,8 +1,16 @@
 ﻿@model PostFeed.Views.ViewModels.PostViewModel
 <div class="col-lg-offset-3 col-lg-6">
-    <h3 class="text-left">@Html.DisplayFor(model => model.Title) <small class="text-center">@Html.DisplayFor(model => model.PostCreator.Name)  <small>@Html.DisplayTextFor(model => model.TimePosted)</small></small></h3>
+    <h3 class="text-left">@Html.DisplayFor(model => model.Title)</h3>
+    <table style="width:100%">
+        <tr>
+            <td>@Html.DisplayFor(model => model.PostCreator.Name)</td>
+            <td class="text-right">@Html.DisplayTextFor(model => model.TimePosted)</td>
+        </tr>
+    </table>
     <p class="text-center well"> @Html.DisplayFor(model => model.BodyText)</p>
+    <hr />
 </div>
+
 @*https://cmatskas.com/update-an-mvc-partial-view-with-ajax/*@
 @*http://www.c-sharpcorner.com/UploadFile/3d39b4/rendering-a-partial-view-and-json-data-using-ajax-in-Asp-Net/*@
 @*http://www.binaryintellect.net/articles/218ca630-ba50-48fe-af6e-6f754b5894aa.aspx*@
