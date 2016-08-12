@@ -13,5 +13,17 @@ namespace PostFeed.Services
         {
             _repo = new PostRepository(PostFeedDbContext.Create());
         }
+
+        public List<Post> GetRecent(int amount, TimeSpan recency)
+        {
+            DateTime recentDate = DateTime.Now.Subtract(recency);
+            return GetAll()
+                //.GroupBy(p => p.TimePosted > recentDate)
+                .Where(p => p.TimePosted > recentDate)
+                //.SelectMany(p => p)
+                .OrderByDescending(p => p.TimePosted)
+                .Take(amount)
+                .ToList();
+        }
     }
 }

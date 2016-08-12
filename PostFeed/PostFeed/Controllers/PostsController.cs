@@ -26,6 +26,14 @@ namespace PostFeed.Controllers
             //return postServices.GetAll().Where(p=> p.TimePosted >= DateTime.Now.Subtract(new TimeSpan(24,0,0)));
         }
 
+        // GET: api/Posts/Recent/id
+        [ResponseType(typeof(List<Post>))]
+        [Route("api/Posts/Recent/{id}")]
+        public List<Post> GetRecentPosts(int id = 10)
+        {
+            return postServices.GetRecent(id, new TimeSpan(1, 0, 0, 0));
+        }
+
         // GET: api/Posts/5
         [ResponseType(typeof(Post))]
         public IHttpActionResult GetPost(int id)

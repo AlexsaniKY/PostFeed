@@ -35,9 +35,17 @@
             </div>
         </div>
     </div>
+
     <div class="container body-content">
-        @RenderBody()  
+
+        <div class="container-fluid" style="overflow-y:auto; height:80vh">
+            @foreach (PostFeed.Views.ViewModels.PostViewModel p in Model)
+            {
+                @Html.Partial("_PostPartial", p)
+            }
+        </div>
     </div>
+
     <footer>
         <hr />
         <p class="text-center">&copy; @DateTime.Now.Year - My ASP.NET Application</p>

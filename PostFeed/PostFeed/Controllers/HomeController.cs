@@ -17,7 +17,17 @@ namespace PostFeed.Controllers
 
         public ActionResult Index()
         {
-            return View(GetRecentPosts());
+            List<Post> recentPosts = postServices.GetRecent(10, new TimeSpan(1, 0, 0, 0));
+            List<PostViewModel> allPostViewModels = new List<PostViewModel>();
+            PostViewModel postViewModel;
+            foreach (Post p in recentPosts)
+            {
+                postViewModel = new PostViewModel(p);
+                postViewModel.PostCreator = new AuthorViewModel(authorServices.Get(p.AuthorId));
+                allPostViewModels.Add(postViewModel);
+            }
+            return View(allPostViewModels);
+            //return View(GetRecentPosts());
         }
 
         private ICollection<PostViewModel> GetRecentPosts()
