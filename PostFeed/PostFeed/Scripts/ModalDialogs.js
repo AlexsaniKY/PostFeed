@@ -17,8 +17,10 @@ $(function () {
             success: function (response) {
                 var allAuthors = response;
                 var authorNames = [];
+                var authorIds = [];
                 for(var i = 0; i< allAuthors.length; i++){
                     authorNames.push(allAuthors[i].Name);
+                    authorIds.push(allAuthors[i].Id);
                 }
                 var htmlselect = document.createElement('select');
                 htmlselect.name = 'Authors';
@@ -27,12 +29,16 @@ $(function () {
                 var option;
                 for (var i = 0; i < authorNames.length; i++) {
                     option = document.createElement("option");
-                    option.value = authorNames[i];
+                    option.value = authorIds[i];
                     option.text = authorNames[i];
                     htmlselect.appendChild(option);
                 }
-
-                $("#nameSelect").text = htmlselect.toString();
+                htmlselect.className += " form-control";
+                var selectionElement = document.getElementById("nameSelect");
+                while (selectionElement.firstChild){
+                    selectionElement.removeChild(selectionElement.firstChild)
+                }
+                selectionElement.appendChild(htmlselect);
                 
             }
         });
@@ -73,10 +79,9 @@ $(function () {
 
         valid = valid && checkLength(name, "username", 3, 16);
         valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
-        var nameText = name.serialize().split("=")[1];
         if (valid) {
             //use ajax to add the user
-            var data = { Name: nameText, Active: true };
+            var data = { Name: name.val(), Active: true };
             $.ajax({
                 type: "POST",
                 url: '/api/Authors',
