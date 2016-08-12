@@ -9,12 +9,13 @@ namespace PostFeed.Views.ViewModels
 {
     public class PostViewModel
     {
-        [Required]
         public int Id { get; set; }
         public bool Active { get; set; }
         public string Title { get; set; }
+        [Required]
         public string BodyText { get; set; }
         public DateTime TimePosted { get; set; }
+        [Required]
         public int AuthorId { get; set; }
         public AuthorViewModel PostCreator { get; set; }
 

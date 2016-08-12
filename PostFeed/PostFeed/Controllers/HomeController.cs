@@ -31,6 +31,7 @@ namespace PostFeed.Controllers
                 postView.PostCreator = new AuthorViewModel(authorServices.Get(p.AuthorId));
                 postViewModels.Add(postView);
             }
+            postViewModels.Sort((x, y) => DateTime.Compare(y.TimePosted, x.TimePosted));
             return postViewModels;
         }
 

@@ -5,8 +5,14 @@ $(function () {
     var userDialog, userForm,
         //dialog and form for post creation
         postDialog, postForm,
+
         name = $("#name"),
         allUserFields = $([]).add(name),
+
+        nameSelectList = $("#nameSelectList");
+        title = $("#title");
+        bodyText = $("#bodyText");
+        allPostFields = $([]).add(nameSelectList).add(title).add(bodyText);
         tips = $(".validateTips");
 
     function populateAuthorsList(){
@@ -55,7 +61,7 @@ $(function () {
     function checkLength(o, n, min, max) {
         if (o.val().length > max || o.val().length < min) {
             o.addClass("ui-state-error");
-            updateTips("Length of " + n + "must be between" +
+            updateTips("Length of " + n + " must be between " +
                 min + " and " + max + ".");
             return false;
         } else {
@@ -97,8 +103,32 @@ $(function () {
         return valid;
     }
 
-    function addPost(){
-        postDialog.dialog("close");
+    function addPost() {
+        var valid = true;
+        allPostFields.removeClass("ui-state-error");
+
+        valid = valid && checkLength(title, "title", 5, 30);
+        valid = valid && checkLength(bodyText, "text body", 5, 512);
+        if (valid) {
+            var data = {
+                Active: true,
+                Title: title.val(),
+                BodyText: bodyText.val(),
+                AuthorId: nameSelectList.val()
+            };
+            $.ajax({
+                type: "POST",
+                url: '/api/Posts',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                cache: false,
+                success: function (response) {
+
+                }
+            })
+            postDialog.dialog("close");
+        }
+        
     }
 
     postDialog = $("#new-post-form").dialog({
@@ -114,7 +144,7 @@ $(function () {
             },
             close: function () {
                 postForm[0].reset();
-                allUserFields.removeClass("ui-state-error");
+                allPostFields.removeClass("ui-state-error");
             }
     });
 

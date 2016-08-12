@@ -55,8 +55,12 @@
             <fieldset>
                 <label for="nameSelectList">Name</label>
                 <div id="nameSelect">
-                    @Html.DropDownList("Authors", null, htmlAttributes: new {@class = "form-control", @id = "nameSelectList"})
+                    @Html.DropDownList("Authors", null, htmlAttributes: new { @class = "form-control", @id = "nameSelectList" })
                 </div>
+                <hr />
+                <input type="text" name="title" id="title" placeholder="Title" class="text ui-widget-content ui-corner-all">
+                <hr />
+                <textarea class="form-control" rows="4" id="bodyText" placeholder="Body Text"></textarea>
             </fieldset>
         </form>
     </div>

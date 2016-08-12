@@ -21,6 +21,7 @@ namespace PostFeed.Domain
         public string BodyText { get; set; }
         public DateTime TimePosted { get; set; }
 
+        [Required]
         public int AuthorId { get; set; }
         [ForeignKey("AuthorId")]
         public Author PostCreator { get; set; }

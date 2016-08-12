@@ -6,6 +6,7 @@ using PostFeed.Domain;
 using PostFeed.Services;
 using PostFeed.Views.ViewModels;
 using System.Collections.Generic;
+using System;
 
 namespace PostFeed.Controllers
 {
@@ -19,7 +20,9 @@ namespace PostFeed.Controllers
         [ResponseType(typeof(List<Author>))]
         public List<Author> GetAuthors()
         {
-            return authorServices.GetAll().ToList();
+            return authorServices
+                .GetAll()
+                .ToList();
         }
 
         // GET: api/Authors/5

@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using PostFeed.Domain;
 using PostFeed.Infrastructure;
 using PostFeed.Services;
+using PostFeed.Views.ViewModels;
 
 namespace PostFeed.Controllers
 {
@@ -58,17 +59,20 @@ namespace PostFeed.Controllers
         }
 
         // POST: api/Posts
-        [ResponseType(typeof(Post))]
-        public IHttpActionResult PostPost(Post post)
+        [HttpPost]
+        [Route("api/Posts")]
+        [ResponseType(typeof(PostViewModel))]
+        public IHttpActionResult PostPost([FromBody] PostViewModel post)
         {
+            post.TimePosted = DateTime.Now;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            
+            int id = postServices.Add(new Post(post));
 
-            postServices.Add(post);
-
-            return CreatedAtRoute("DefaultApi", new { id = post.Id }, post);
+            return CreatedAtRoute("DefaultApi", new {controller = "Posts", id = post.Id }, post);
         }
 
         // DELETE: api/Posts/5
