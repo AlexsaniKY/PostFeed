@@ -29,7 +29,7 @@ namespace PostFeed.Controllers
         // GET: api/Posts/Recent/id
         [ResponseType(typeof(List<Post>))]
         [Route("api/Posts/Recent/{id}")]
-        public List<Post> GetRecentPosts(int id = 10)
+        public IEnumerable<Post> GetRecentPosts(int id = 10)
         {
             return postServices.GetRecent(id, new TimeSpan(1, 0, 0, 0));
         }
