@@ -56,7 +56,18 @@ $(function () {
             url: "/Home/PartialPost/" + id,
             cache: false,
             success: function (response) {
-                $("#partials").prepend(response);
+                
+                responseDiv = document.createElement("div");
+                responseDiv.innerHTML = response;
+                responseJQuery = jQuery(responseDiv);
+                responseJQuery.hide();
+
+                partialSection = $("#partials");
+                partialSection.prepend(responseJQuery);
+
+                responseJQuery.show(500);
+
+
             }
         });
     }
