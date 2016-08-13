@@ -34,6 +34,10 @@ namespace PostFeed.Controllers
             return PartialView("_PostPartial", postViewModel);
         } 
 
+        //[HttpGet]
+        //public PartialViewResult PartialPostRange()
+
+
         private ICollection<PostViewModel> GetRecentPosts()
         {
             var allposts = postServices.GetAll();

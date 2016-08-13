@@ -1,0 +1,6 @@
+﻿@model IEnumerable<PostFeed.Views.ViewModels.PostViewModel>
+
+@foreach(PostFeed.Views.ViewModels.PostViewModel post in Model)
+{
+    @Html.Partial("_PostPartial",post)
+}

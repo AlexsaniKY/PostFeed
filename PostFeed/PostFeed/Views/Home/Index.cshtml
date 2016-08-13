@@ -42,10 +42,7 @@
     <div class="container body-content">
 
         <div class="container-fluid" style="overflow-y:auto; height:80vh" id="partials">
-            @foreach (PostFeed.Views.ViewModels.PostViewModel p in Model)
-            {
-                @Html.Partial("_PostPartial", p)
-            }
+            @Html.Partial("_PostPartialRange", Model)
         </div>
     </div>
 
@@ -68,7 +65,7 @@
                     @Html.DropDownList("Authors", null, htmlAttributes: new { @class = "form-control", @id = "nameSelectList" })
                 </div>
                 <hr />
-                <input type="text" name="title" id="title" placeholder="  Title" class="text ui-widget-content ui-corner-all">
+                <input type="text" name="title" id="title" placeholder=" Title" class="text ui-widget-content ui-corner-all">
                 <hr />
                 <textarea class="form-control" rows="4" id="bodyText" placeholder="Body Text"></textarea>
             </fieldset>
