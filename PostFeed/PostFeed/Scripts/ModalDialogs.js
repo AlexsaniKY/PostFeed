@@ -1,19 +1,51 @@
 ﻿//http://jqueryui.com/dialog/#modal-form
 
 $(function () {
+    //prime our page
+    addPartialRange(10);
+    //addNewPostButton();
+    
+    //Prepare modal values
+
         //dialog and form for creating new user
     var userDialog, userForm,
         //dialog and form for post creation
         postDialog, postForm,
-
+        //user creation fields
         name = $("#name"),
         allUserFields = $([]).add(name),
-
-        nameSelectList = $("#nameSelectList");
-        title = $("#title");
-        bodyText = $("#bodyText");
-        allPostFields = $([]).add(nameSelectList).add(title).add(bodyText);
+        //post creation fields
+        nameSelectList = $("#nameSelectList"),
+        title = $("#title"),
+        bodyText = $("#bodyText"),
+        allPostFields = $([]).add(nameSelectList).add(title).add(bodyText),
+        //all tips for modals
         tips = $(".validateTips");
+
+    function removeNewPostButton() {
+        var postButton = $("more").detach;
+    }
+
+    function addNewPostButton() {
+        var newPostButton = document.createElement("button");
+        newPostButton.type = "button";
+        newPostButton.className += " btn btn-info";
+        newPostButton.style = "width:50%; display: table; margin: 0 auto";
+        newPostButton.id = "more";
+        newPostButton.innerText = "Load More Posts";
+
+        var buttonDiv = document.createElement("DIV");
+        buttonDiv.style += " text-align: center";
+        buttonDiv.appendChild(newPostButton);
+
+        var buttonJQuery = jQuery(buttonDiv);
+        buttonJQuery.hide();
+
+        partialSection = $("#partials");
+        partialSection.append(buttonJQuery);
+
+        buttonJQuery.show(1000);
+    }
 
     function populateAuthorsList(){
         $.ajax({
@@ -56,20 +88,33 @@ $(function () {
             url: "/Home/PartialPost/" + id,
             cache: false,
             success: function (response) {
-                
-                responseDiv = document.createElement("div");
-                responseDiv.innerHTML = response;
-                responseJQuery = jQuery(responseDiv);
-                responseJQuery.hide();
-
-                partialSection = $("#partials");
-                partialSection.prepend(responseJQuery);
-
-                responseJQuery.show(500);
-
-
+                addPartialToSection(response);
             }
         });
+    }
+
+    function addPartialRange(amount){
+        $.ajax({
+            type: "GET",
+            url: "/Home/PartialPostRange",
+            data: {amount: amount},
+            cache: false,
+            success: function (response) {
+                addPartialToSection(response);
+            }
+        });
+    }
+
+    function addPartialToSection(partialView){
+        responseDiv = document.createElement("div");
+        responseDiv.innerHTML = partialView;
+        responseJQuery = jQuery(responseDiv);
+        responseJQuery.hide();
+
+        partialSection = $("#partials");
+        partialSection.prepend(responseJQuery);
+
+        responseJQuery.show(500);
     }
 
     function updateTips(t) {

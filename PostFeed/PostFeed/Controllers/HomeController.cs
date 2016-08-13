@@ -17,12 +17,12 @@ namespace PostFeed.Controllers
 
         public ActionResult Index()
         {
-            IEnumerable<Post> recentPosts = postServices.GetRecent(10, new TimeSpan(1, 0, 0, 0));
-            IEnumerable<PostViewModel> allPostViewModels =
-                postServices.PostCollectionToPostVMEnum(
-                recentPosts).ToList();
-            postServices.PopulateAuthors(allPostViewModels);
-            return View(allPostViewModels);
+            //IEnumerable<Post> recentPosts = postServices.GetRecent(10, new TimeSpan(1, 0, 0, 0));
+            //IEnumerable<PostViewModel> allPostViewModels =
+            //    postServices.PostCollectionToPostVMEnum(
+            //    recentPosts).ToList();
+            //postServices.PopulateAuthors(allPostViewModels);
+            return View();// allPostViewModels);
 
         }
 
@@ -32,10 +32,20 @@ namespace PostFeed.Controllers
             PostViewModel postViewModel = new PostViewModel(postServices.Get(id));
             postViewModel.PostCreator = new AuthorViewModel(authorServices.Get(postViewModel.AuthorId));
             return PartialView("_PostPartial", postViewModel);
-        } 
+        }
 
-        //[HttpGet]
-        //public PartialViewResult PartialPostRange()
+        [HttpGet]
+        public PartialViewResult PartialPostRange(int amount)
+        {
+            IEnumerable<Post> recentPosts = postServices.GetRecent(amount);
+            IEnumerable<PostViewModel> allPostViewModels =
+                postServices.PostCollectionToPostVMEnum(
+                recentPosts).ToList();
+            postServices.PopulateAuthors(allPostViewModels);
+            return PartialView("_PostPartialRange", allPostViewModels);
+        }
+
+        //public PartialViewResult PartialPostRange(int amount, DateTime beforeDate)
 
 
         private ICollection<PostViewModel> GetRecentPosts()
