@@ -46,6 +46,13 @@ namespace PostFeed.Infrastructure
             return entity.Id;
         }
 
+        public int AddAndSave(T entity)
+        {
+            _db.Set<T>().Add(entity);
+            SaveChanges();
+            return entity.Id;
+        }
+
         public void Update(T altered)
         {
             _db.Entry(altered).State = EntityState.Modified;

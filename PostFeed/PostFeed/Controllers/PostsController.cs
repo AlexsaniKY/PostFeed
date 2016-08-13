@@ -78,9 +78,15 @@ namespace PostFeed.Controllers
                 return BadRequest(ModelState);
             }
             
-            int id = postServices.Add(new Post(post));
-
-            return CreatedAtRoute("DefaultApi", new {controller = "Posts", id = post.Id }, post);
+            int postid = postServices.Add(new Post(post));
+            post.Id = postid;
+            return CreatedAtRoute(
+                "DefaultApi", 
+                new {
+                    controller = "Posts",
+                    id = postid
+                }, 
+                post);
         }
 
         // DELETE: api/Posts/5

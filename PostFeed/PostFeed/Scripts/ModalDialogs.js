@@ -49,6 +49,18 @@ $(function () {
             }
         });
     }
+
+    function addPartial(id) {
+        $.ajax({
+            type: "GET",
+            url: "/Home/PartialPost/" + id,
+            cache: false,
+            success: function (response) {
+                $("#partials").prepend(response);
+            }
+        });
+    }
+
     function updateTips(t) {
         tips
             .text(t)
@@ -123,7 +135,7 @@ $(function () {
                 contentType: "application/json",
                 cache: false,
                 success: function (response) {
-
+                    addPartial(response.Id);
                 }
             })
             postDialog.dialog("close");

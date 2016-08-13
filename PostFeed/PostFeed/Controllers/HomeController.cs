@@ -20,11 +20,19 @@ namespace PostFeed.Controllers
             IEnumerable<Post> recentPosts = postServices.GetRecent(10, new TimeSpan(1, 0, 0, 0));
             IEnumerable<PostViewModel> allPostViewModels =
                 postServices.PostCollectionToPostVMEnum(
-                recentPosts);
+                recentPosts).ToList();
             postServices.PopulateAuthors(allPostViewModels);
             return View(allPostViewModels);
 
         }
+
+        [HttpGet]
+        public PartialViewResult PartialPost(int id)
+        {
+            PostViewModel postViewModel = new PostViewModel(postServices.Get(id));
+            postViewModel.PostCreator = new AuthorViewModel(authorServices.Get(postViewModel.AuthorId));
+            return PartialView("_PostPartial", postViewModel);
+        } 
 
         private ICollection<PostViewModel> GetRecentPosts()
         {
