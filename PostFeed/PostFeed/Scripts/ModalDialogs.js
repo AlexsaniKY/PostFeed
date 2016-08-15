@@ -194,7 +194,7 @@ $(function () {
                 contentType: "application/json",
                 cache: false,
                 success: function (response) {
-                    getPartial(response.Id);
+                    getPartial(response.Id, false);
                 }
             })
             postDialog.dialog("close");

@@ -19,6 +19,10 @@ namespace PostFeed.Views.ViewModels
         public int AuthorId { get; set; }
         public AuthorViewModel PostCreator { get; set; }
 
+        public string TimePostedFormatted {
+            get { return TimePosted.ToShortDateString() + "  " + TimePosted.ToShortTimeString(); }
+            }
+
         public PostViewModel() { }
         public PostViewModel(Post post)
         {

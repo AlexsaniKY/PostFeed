@@ -4,7 +4,7 @@
     <table style="width:100%">
         <tr>
             <td>@Html.DisplayFor(model => model.PostCreator.Name)</td>
-            <td class="text-right">@Html.DisplayTextFor(model => model.TimePosted)</td>
+            <td class="text-right">@Html.DisplayTextFor(model => model.TimePostedFormatted)</td>
         </tr>
     </table>
     <p class="text-center well"> @Html.DisplayFor(model => model.BodyText)</p>
