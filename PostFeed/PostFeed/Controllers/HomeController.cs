@@ -45,7 +45,15 @@ namespace PostFeed.Controllers
             return PartialView("_PostPartialRange", allPostViewModels);
         }
 
-        //public PartialViewResult PartialPostRange(int amount, DateTime beforeDate)
+        public PartialViewResult PartialPostRangeBeforeId(int? amount, int id)
+        {
+            
+        }
+
+        public PartialViewResult PartialPostRangeAfterID(int? amount, int id)
+        {
+
+        }
 
 
         private ICollection<PostViewModel> GetRecentPosts()

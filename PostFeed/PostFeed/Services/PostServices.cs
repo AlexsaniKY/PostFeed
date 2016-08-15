@@ -76,21 +76,58 @@ namespace PostFeed.Services
             return GetPostsAfter(amount, recentDate);
         }
 
-        public IQueryable<Post> GetPostsAfter(int amount, DateTime sinceDate)
+
+        public IQueryable<Post> GetPostsAfter(int id)
         {
             return GetAll()
-                //.GroupBy(p => p.TimePosted > recentDate)
-                .Where(p => p.TimePosted > sinceDate)
-                //.SelectMany(p => p)
-                .OrderByDescending(p => p.TimePosted)
+                .Where(p => p.TimePosted > Get(id).TimePosted)
+                .OrderByDescending(p => p.TimePosted);
+        }
+
+        public IQueryable<Post> GetPostsAfter(int amount, int id)
+        {
+            return GetPostsAfter(id)
                 .Take(amount);
+        }
+
+        public IQueryable<Post> GetPostsAfter(DateTime sinceDate)
+        {
+            return GetAll()
+                .Where(p => p.TimePosted > sinceDate)
+                .OrderByDescending(p => p.TimePosted);
+        }
+
+        public IQueryable<Post> GetPostsAfter(int amount, DateTime sinceDate)
+        {
+            return GetPostsAfter(sinceDate)
+                .Take(amount);
+        }
+
+
+
+        public IQueryable<Post> GetPostsBefore(int id)
+        {
+            return GetAll()
+                .Where(p => p.TimePosted < Get(id).TimePosted)
+                .OrderByDescending(p => p.TimePosted);
+        }
+
+        public IQueryable<Post> GetPostsBefore(int amount, int id)
+        {
+            return GetPostsBefore(id)
+                .Take(amount);
+        }
+
+        public IQueryable<Post> GetPostsBefore(DateTime beforeDate)
+        {
+            return GetAll()
+                .Where(p => p.TimePosted < beforeDate)
+                .OrderByDescending(p => p.TimePosted);
         }
 
         public IQueryable<Post> GetPostsBefore(int amount, DateTime beforeDate)
         {
-            return GetAll()
-                .Where(p => p.TimePosted < beforeDate)
-                .OrderByDescending(p => p.TimePosted)
+            return GetPostsBefore(beforeDate)
                 .Take(amount);
 
         }
