@@ -2,8 +2,8 @@
 
 $(function () {
     //prime our page
-    addPartialRange(10);
-    //addNewPostButton();
+    getPartialRange(10, true);
+    addNewPostButton();
     
     //Prepare modal values
 
@@ -41,10 +41,10 @@ $(function () {
         var buttonJQuery = jQuery(buttonDiv);
         buttonJQuery.hide();
 
-        partialSection = $("#partials");
+        partialSection = $("#button-div");
         partialSection.append(buttonJQuery);
 
-        buttonJQuery.show(1000);
+        buttonJQuery.show(1500);
     }
 
     function populateAuthorsList(){
@@ -82,37 +82,40 @@ $(function () {
         });
     }
 
-    function addPartial(id) {
+    function getPartial(id, end) {
         $.ajax({
             type: "GET",
             url: "/Home/PartialPost/" + id,
             cache: false,
             success: function (response) {
-                addPartialToSection(response);
+                addPartialToSection(response, end);
             }
         });
     }
 
-    function addPartialRange(amount){
+    function getPartialRange(amount, end){
         $.ajax({
             type: "GET",
             url: "/Home/PartialPostRange",
             data: {amount: amount},
             cache: false,
             success: function (response) {
-                addPartialToSection(response);
+                addPartialToSection(response, end);
             }
         });
     }
 
-    function addPartialToSection(partialView){
+    function addPartialToSection(partialView, end){
         responseDiv = document.createElement("div");
         responseDiv.innerHTML = partialView;
         responseJQuery = jQuery(responseDiv);
         responseJQuery.hide();
 
-        partialSection = $("#partials");
-        partialSection.prepend(responseJQuery);
+        partialSection = $("#partials-div");
+        if (end)
+            partialSection.append(responseJQuery)
+        else
+            partialSection.prepend(responseJQuery);
 
         responseJQuery.show(500);
     }
@@ -191,7 +194,7 @@ $(function () {
                 contentType: "application/json",
                 cache: false,
                 success: function (response) {
-                    addPartial(response.Id);
+                    getPartial(response.Id);
                 }
             })
             postDialog.dialog("close");
