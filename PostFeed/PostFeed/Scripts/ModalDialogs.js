@@ -1,6 +1,6 @@
 ﻿//http://jqueryui.com/dialog/#modal-form
 
-$(function () {
+$(document).ready(function () {
     //prime our page
     getPartialRange(10, true);
     addNewPostButton();
@@ -22,8 +22,16 @@ $(function () {
         //all tips for modals
         tips = $(".validateTips");
 
+    function getLastPostId() {
+        return $("#partials-div").children().last().prop("id");
+    }
+
+    function getFirstPostId() {
+        return $("#partials-div").children().first().prop("id");
+    }
+
     function removeNewPostButton() {
-        var postButton = $("more").detach;
+        var postButton = $("#more").remove();
     }
 
     function addNewPostButton() {
@@ -43,6 +51,9 @@ $(function () {
 
         partialSection = $("#button-div");
         partialSection.append(buttonJQuery);
+        buttonJQuery.click(function () {
+            getNextPartialsSincePost(getLastPostId(), 10);
+        });
 
         buttonJQuery.show(1500);
     }
@@ -82,6 +93,34 @@ $(function () {
         });
     }
 
+
+
+    function getAllPartialsSincePost(id) {
+        $.ajax({
+            type: "GET",
+            url: "/Home/PartialPostRangeAfterId",
+            data: { id: id },
+            cache: false,
+            success: function (response) {
+                addPartialToSection(response, false);
+            }
+        })
+    }
+
+    function getNextPartialsSincePost(id, amount) {
+        $.ajax({
+            type: "GET",
+            url: "/Home/PartialPostRangeBeforeId",
+            data: {id: id, amount: amount},
+            cache: false,
+            success: function (response) {
+                if (response)
+                    addPartialToSection(response, true);
+                else removeNewPostButton();
+            }
+        });
+    }
+
     function getPartial(id, end) {
         $.ajax({
             type: "GET",
@@ -106,9 +145,9 @@ $(function () {
     }
 
     function addPartialToSection(partialView, end){
-        responseDiv = document.createElement("div");
-        responseDiv.innerHTML = partialView;
-        responseJQuery = jQuery(responseDiv);
+        //responseDiv = document.createElement("div");
+        //responseDiv.innerHTML = partialView;
+        responseJQuery = jQuery(partialView);
         responseJQuery.hide();
 
         partialSection = $("#partials-div");

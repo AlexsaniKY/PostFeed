@@ -79,8 +79,9 @@ namespace PostFeed.Services
 
         public IQueryable<Post> GetPostsAfter(int id)
         {
+            Post post = Get(id);
             return GetAll()
-                .Where(p => p.TimePosted > Get(id).TimePosted)
+                .Where(p => p.TimePosted > post.TimePosted)
                 .OrderByDescending(p => p.TimePosted);
         }
 
@@ -107,8 +108,9 @@ namespace PostFeed.Services
 
         public IQueryable<Post> GetPostsBefore(int id)
         {
+            Post post = Get(id);
             return GetAll()
-                .Where(p => p.TimePosted < Get(id).TimePosted)
+                .Where(p => p.TimePosted < post.TimePosted)
                 .OrderByDescending(p => p.TimePosted);
         }
 
