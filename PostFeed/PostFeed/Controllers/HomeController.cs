@@ -40,19 +40,37 @@ namespace PostFeed.Controllers
             IEnumerable<Post> recentPosts = postServices.GetRecent(amount);
             IEnumerable<PostViewModel> allPostViewModels =
                 postServices.PostCollectionToPostVMEnum(
-                recentPosts).ToList();
+                    recentPosts).ToList();
             postServices.PopulateAuthors(allPostViewModels);
             return PartialView("_PostPartialRange", allPostViewModels);
         }
 
+        [HttpGet]
         public PartialViewResult PartialPostRangeBeforeId(int? amount, int id)
         {
-            
+            IEnumerable<Post> recentPosts;
+            if (amount != null)
+                recentPosts = postServices.GetPostsBefore(amount ?? default(int), id);
+            else recentPosts = postServices.GetPostsBefore(id);
+            IEnumerable<PostViewModel> allPostViewModels =
+                postServices.PostCollectionToPostVMEnum(
+                    recentPosts).ToList();
+            postServices.PopulateAuthors(allPostViewModels);
+            return PartialView("_PostPartialRange", allPostViewModels);
         }
 
+        [HttpGet]
         public PartialViewResult PartialPostRangeAfterID(int? amount, int id)
         {
-
+            IEnumerable<Post> recentPosts;
+            if (amount != null)
+                recentPosts = postServices.GetPostsAfter(amount ?? default(int), id);
+            else recentPosts = postServices.GetPostsAfter(id);
+            IEnumerable<PostViewModel> allPostViewModels =
+                postServices.PostCollectionToPostVMEnum(
+                    recentPosts).ToList();
+            postServices.PopulateAuthors(allPostViewModels);
+            return PartialView("_PostPartialRange", allPostViewModels);
         }
 
 
