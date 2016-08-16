@@ -15,17 +15,23 @@ namespace PostFeed.Controllers
         internal AuthorServices authorServices = new AuthorServices();
         internal PostServices postServices = new PostServices();
 
+        /// <summary>
+        /// Returns the main page, and the only complete view.
+        /// All content is generated at run time through Api calls
+        /// and Partials
+        /// </summary>
+        /// <returns>View</returns>
         public ActionResult Index()
         {
-            //IEnumerable<Post> recentPosts = postServices.GetRecent(10, new TimeSpan(1, 0, 0, 0));
-            //IEnumerable<PostViewModel> allPostViewModels =
-            //    postServices.PostCollectionToPostVMEnum(
-            //    recentPosts).ToList();
-            //postServices.PopulateAuthors(allPostViewModels);
-            return View();// allPostViewModels);
-
+            return View();
         }
 
+        /// <summary>
+        /// Get a Post presented in a Partial View displaying all
+        /// necessary 
+        /// </summary>
+        /// <param name="id">Key Id of Post</param>
+        /// <returns>Partial View detailing the Post</returns>
         [HttpGet]
         public PartialViewResult PartialPost(int id)
         {
@@ -34,10 +40,18 @@ namespace PostFeed.Controllers
             return PartialView("_PostPartial", postViewModel);
         }
 
+        /// <summary>
+        /// Get a Range of Recent Posts in a sequence of
+        /// details views
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns>Partial View of multiple PostPartials</returns>
         [HttpGet]
         public PartialViewResult PartialPostRange(int amount)
         {
+            //Get all recent posts 
             IEnumerable<Post> recentPosts = postServices.GetRecent(amount);
+            //convert recentPosts' Posts to a list of PostViewModels
             IEnumerable<PostViewModel> allPostViewModels =
                 postServices.PostCollectionToPostVMEnum(
                     recentPosts).ToList();
@@ -45,13 +59,24 @@ namespace PostFeed.Controllers
             return PartialView("_PostPartialRange", allPostViewModels);
         }
 
+        /// <summary>
+        /// Get a Range of Recent posts before a Post with given Id
+        /// </summary>
+        /// <param name="amount">amount of Posts to retrieve</param>
+        /// <param name="id">Id of excluded Post to set start point</param>
+        /// <returns>Partial View of multiple PostPartials</returns>
         [HttpGet]
         public PartialViewResult PartialPostRangeBeforeId(int? amount, int id)
         {
             IEnumerable<Post> recentPosts;
             if (amount != null)
+            {
                 recentPosts = postServices.GetPostsBefore(amount ?? default(int), id);
-            else recentPosts = postServices.GetPostsBefore(id);
+            }
+            else
+            {
+                recentPosts = postServices.GetPostsBefore(id);
+            }
             IEnumerable<PostViewModel> allPostViewModels =
                 postServices.PostCollectionToPostVMEnum(
                     recentPosts).ToList();
@@ -59,6 +84,12 @@ namespace PostFeed.Controllers
             return PartialView("_PostPartialRange", allPostViewModels);
         }
 
+        /// <summary>
+        /// Get a Range of Recent posts after a Post with given Id
+        /// </summary>
+        /// <param name="amount">amount of Posts to retrieve</param>
+        /// <param name="id">Id of excluded Post to set start point</param>
+        /// <returns>Partial View of multiple PostPartials</returns>
         [HttpGet]
         public PartialViewResult PartialPostRangeAfterID(int? amount, int id)
         {
@@ -73,7 +104,10 @@ namespace PostFeed.Controllers
             return PartialView("_PostPartialRange", allPostViewModels);
         }
 
-
+        /// <summary>
+        /// Get Recent Posts
+        /// </summary>
+        /// <returns>Partial View of all recent Posts</returns>
         private ICollection<PostViewModel> GetRecentPosts()
         {
             var allposts = postServices.GetAll();
@@ -89,19 +123,5 @@ namespace PostFeed.Controllers
             return postViewModels;
         }
 
-
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
-
-        //    return View();
-        //}
     }
 }
