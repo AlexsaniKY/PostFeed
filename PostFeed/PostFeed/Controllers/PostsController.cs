@@ -20,14 +20,15 @@ namespace PostFeed.Controllers
         private PostServices postServices = new PostServices();
         
         // GET: api/Posts
+        [HttpGet]
+        [Route("api/Posts")]
         public IQueryable<Post> GetPosts()
         {
             return postServices.GetAll();
-            //return postServices.GetAll().Where(p=> p.TimePosted >= DateTime.Now.Subtract(new TimeSpan(24,0,0)));
         }
 
         // GET: api/Posts/Recent/id
-        [ResponseType(typeof(List<Post>))]
+        [ResponseType(typeof(IEnumerable<Post>))]
         [Route("api/Posts/Recent/{id}")]
         public IEnumerable<Post> GetRecentPosts(int id = 10)
         {
@@ -35,6 +36,8 @@ namespace PostFeed.Controllers
         }
 
         // GET: api/Posts/5
+        [HttpGet]
+        [Route("api/Posts/{id}")]
         [ResponseType(typeof(Post))]
         public IHttpActionResult GetPost(int id)
         {
@@ -48,6 +51,8 @@ namespace PostFeed.Controllers
         }
 
         // PUT: api/Posts/5
+        [HttpPut]
+        [Route("api/Posts/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPost(int id, Post post)
         {
@@ -90,6 +95,8 @@ namespace PostFeed.Controllers
         }
 
         // DELETE: api/Posts/5
+        [HttpDelete]
+        [Route("api/Posts/{id}")]
         [ResponseType(typeof(Post))]
         public IHttpActionResult DeletePost(int id)
         {

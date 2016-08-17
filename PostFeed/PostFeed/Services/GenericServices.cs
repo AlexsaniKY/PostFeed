@@ -30,9 +30,6 @@ namespace PostFeed.Services
 
         public int Add(T newEntity)
         {
-            //int returnInt =_repo.Add(newEntity);
-            //_repo.SaveChanges();
-            //return returnInt;
             return _repo.AddAndSave(newEntity);
         }
 
