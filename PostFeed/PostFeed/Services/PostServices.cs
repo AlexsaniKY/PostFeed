@@ -85,6 +85,11 @@ namespace PostFeed.Services
             }
         }
 
+        /// <summary>
+        /// Get Recent Posts in Descending order
+        /// </summary>
+        /// <param name="amount">how many posts to return</param>
+        /// <returns>IQueryable of an amount of Posts</returns>
         public IQueryable<Post> GetRecent(int amount)
         {
             return GetAll()
