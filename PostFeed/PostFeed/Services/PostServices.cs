@@ -16,6 +16,11 @@ namespace PostFeed.Services
             _repo = new PostRepository(PostFeedDbContext.Create());
         }
 
+        /// <summary>
+        /// Converts an IEnumerable of Posts to PostViewModels
+        /// </summary>
+        /// <param name="inputList">a sequence of Posts to convert</param>
+        /// <returns>IEnumerable of PostViewModels</returns>
         public IEnumerable<PostViewModel> PostCollectionToPostVMEnum(IEnumerable<Post> inputList)
         {
             return (from post in inputList
@@ -30,6 +35,11 @@ namespace PostFeed.Services
                     });
         }
 
+        /// <summary>
+        /// Converts an IEnumerable of PostViewModels to Posts
+        /// </summary>
+        /// <param name="inputList">a sequence of PostViewModels to convert</param>
+        /// <returns>IEnumerable of Posts</returns>
         public IEnumerable<Post> PostVMCollectionToPostEnum(IEnumerable<PostViewModel> inputList)
         {
             return (from postvm in inputList
@@ -44,22 +54,34 @@ namespace PostFeed.Services
                     });
         }
 
+        /// <summary>
+        /// Adds an Author Entity to each Post in an IEnumerable of Posts
+        /// through AuthorServices
+        /// </summary>
+        /// <param name="postCollection">IEnumerable of Posts to add Authors to</param>
         public void PopulateAuthors(IEnumerable<Post> postCollection)
         {
             foreach (Post post in postCollection)
             {
-                post.PostCreator =
-                    authorServices.Get(post.AuthorId);
+                if(post.PostCreator == null)
+                    post.PostCreator =
+                        authorServices.Get(post.AuthorId);
             }
         }
 
+        /// <summary>
+        /// Adds an Author Entity to each PostViewModel in an IEnumerable of
+        /// PostViewModels through AuthorServices
+        /// </summary>
+        /// <param name="postCollection">IEnumerable of PostViewModels to add Authors to</param>
         public void PopulateAuthors(IEnumerable<PostViewModel> postCollection)
         {
             foreach (PostViewModel postvm in postCollection)
             {
-                postvm.PostCreator = new AuthorViewModel(
-                    authorServices.Get(postvm.AuthorId)
-                        );
+                if(postvm.PostCreator == null)
+                    postvm.PostCreator = new AuthorViewModel(
+                        authorServices.Get(postvm.AuthorId)
+                            );
             }
         }
 
