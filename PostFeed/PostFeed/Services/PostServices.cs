@@ -112,7 +112,7 @@ namespace PostFeed.Services
         /// <summary>
         /// Get Posts created after a Post with given Id
         /// </summary>
-        /// <param name="id">Id of the post to use as a cutoff</param>
+        /// <param name="id">Id of the Post to use as a cutoff</param>
         /// <returns>IQueryable of Posts after the given Post</returns>
         public IQueryable<Post> GetPostsAfter(int id)
         {
@@ -123,17 +123,22 @@ namespace PostFeed.Services
         }
 
         /// <summary>
-        /// Get an amount of posts after a given Id
+        /// Get an amount of Posts after a given Id
         /// </summary>
-        /// <param name="amount"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="amount">amount of Posts to retrieve</param>
+        /// <param name="id">Id of the Post to use as a cutoff</param>
+        /// <returns>IQueryable of an amount of Posts after the given Post</returns>
         public IQueryable<Post> GetPostsAfter(int amount, int id)
         {
             return GetPostsAfter(id)
                 .Take(amount);
         }
 
+        /// <summary>
+        /// Get all Posts after a specified DateTime
+        /// </summary>
+        /// <param name="sinceDate">cutoff DateTime</param>
+        /// <returns>IQueryable of Posts after the given DateTime</returns>
         public IQueryable<Post> GetPostsAfter(DateTime sinceDate)
         {
             return GetAll()
@@ -141,14 +146,23 @@ namespace PostFeed.Services
                 .OrderByDescending(p => p.TimePosted);
         }
 
+        /// <summary>
+        /// Get an amount of Posts after a specified DateTime
+        /// </summary>
+        /// <param name="amount">amount of Posts to retrieve</param>
+        /// <param name="sinceDate">cutoff DateTime</param>
+        /// <returns>IQueryable of an amount of Posts after the given DateTime</returns>
         public IQueryable<Post> GetPostsAfter(int amount, DateTime sinceDate)
         {
             return GetPostsAfter(sinceDate)
                 .Take(amount);
         }
 
-
-
+        /// <summary>
+        /// Get Posts before a Post with the given Id
+        /// </summary>
+        /// <param name="id">Id of the Post to use as a cutoff</param>
+        /// <returns>IQueryable of Posts before the given Post</returns>
         public IQueryable<Post> GetPostsBefore(int id)
         {
             Post post = Get(id);
@@ -157,12 +171,23 @@ namespace PostFeed.Services
                 .OrderByDescending(p => p.TimePosted);
         }
 
+        /// <summary>
+        /// Get an amount of Posts before a Post with given Id
+        /// </summary>
+        /// <param name="amount">amount of Posts to retrieve</param>
+        /// <param name="id">Id of the Post to use as a cutoff</param>
+        /// <returns>IQueryable of an amount of Posts before the given Post</returns>
         public IQueryable<Post> GetPostsBefore(int amount, int id)
         {
             return GetPostsBefore(id)
                 .Take(amount);
         }
 
+        /// <summary>
+        /// Get Posts before a given DateTime
+        /// </summary>
+        /// <param name="beforeDate">DateTime to use as a cutoff</param>
+        /// <returns>IQueryable of Posts before the given DateTime</returns>
         public IQueryable<Post> GetPostsBefore(DateTime beforeDate)
         {
             return GetAll()
@@ -170,6 +195,12 @@ namespace PostFeed.Services
                 .OrderByDescending(p => p.TimePosted);
         }
 
+        /// <summary>
+        /// Get an amount of Posts before a given DateTime
+        /// </summary>
+        /// <param name="amount">amount of Posts to retrieve</param>
+        /// <param name="beforeDate">DateTime to use as a cutoff</param>
+        /// <returns>IQueryable of an amount of Posts before the given DateTime</returns>
         public IQueryable<Post> GetPostsBefore(int amount, DateTime beforeDate)
         {
             return GetPostsBefore(beforeDate)
