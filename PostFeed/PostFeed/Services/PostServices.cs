@@ -97,13 +97,23 @@ namespace PostFeed.Services
                 .Take(amount);
         }
 
+        /// <summary>
+        /// Get Recent Posts in Descending order
+        /// </summary>
+        /// <param name="amount">how many posts to return</param>
+        /// <param name="recency">a time span for how far back to retrieve posts from now</param>
+        /// <returns>IQueryable of an amount of Posts</returns>
         public IQueryable<Post> GetRecent(int amount, TimeSpan recency)
         {
             DateTime recentDate = DateTime.Now.Subtract(recency);
             return GetPostsAfter(amount, recentDate);
         }
 
-
+        /// <summary>
+        /// Get Posts created after a Post with given Id
+        /// </summary>
+        /// <param name="id">Id of the post to use as a cutoff</param>
+        /// <returns>IQueryable of Posts after the given Post</returns>
         public IQueryable<Post> GetPostsAfter(int id)
         {
             Post post = Get(id);
@@ -112,6 +122,12 @@ namespace PostFeed.Services
                 .OrderByDescending(p => p.TimePosted);
         }
 
+        /// <summary>
+        /// Get an amount of posts after a given Id
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IQueryable<Post> GetPostsAfter(int amount, int id)
         {
             return GetPostsAfter(id)
