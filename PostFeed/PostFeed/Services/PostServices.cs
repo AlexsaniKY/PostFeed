@@ -110,7 +110,7 @@ namespace PostFeed.Services
         }
 
         /// <summary>
-        /// Get Posts created after a Post with given Id
+        /// Get Posts created after a Post with given Id, sorted in Descending order
         /// </summary>
         /// <param name="id">Id of the Post to use as a cutoff</param>
         /// <returns>IQueryable of Posts after the given Post</returns>
@@ -123,7 +123,7 @@ namespace PostFeed.Services
         }
 
         /// <summary>
-        /// Get an amount of Posts after a given Id
+        /// Get an amount of Posts after a given Id, sorted in Descending order
         /// </summary>
         /// <param name="amount">amount of Posts to retrieve</param>
         /// <param name="id">Id of the Post to use as a cutoff</param>
@@ -135,7 +135,7 @@ namespace PostFeed.Services
         }
 
         /// <summary>
-        /// Get all Posts after a specified DateTime
+        /// Get all Posts after a specified DateTime, sorted in Descending order
         /// </summary>
         /// <param name="sinceDate">cutoff DateTime</param>
         /// <returns>IQueryable of Posts after the given DateTime</returns>
@@ -147,7 +147,7 @@ namespace PostFeed.Services
         }
 
         /// <summary>
-        /// Get an amount of Posts after a specified DateTime
+        /// Get an amount of Posts after a specified DateTime, sorted in Descending order
         /// </summary>
         /// <param name="amount">amount of Posts to retrieve</param>
         /// <param name="sinceDate">cutoff DateTime</param>
@@ -159,7 +159,7 @@ namespace PostFeed.Services
         }
 
         /// <summary>
-        /// Get Posts before a Post with the given Id
+        /// Get Posts before a Post with the given Id, sorted in Descending order
         /// </summary>
         /// <param name="id">Id of the Post to use as a cutoff</param>
         /// <returns>IQueryable of Posts before the given Post</returns>
@@ -172,7 +172,7 @@ namespace PostFeed.Services
         }
 
         /// <summary>
-        /// Get an amount of Posts before a Post with given Id
+        /// Get an amount of Posts before a Post with given Id, sorted in Descending order
         /// </summary>
         /// <param name="amount">amount of Posts to retrieve</param>
         /// <param name="id">Id of the Post to use as a cutoff</param>
@@ -184,7 +184,7 @@ namespace PostFeed.Services
         }
 
         /// <summary>
-        /// Get Posts before a given DateTime
+        /// Get Posts before a given DateTime, sorted in Descending order
         /// </summary>
         /// <param name="beforeDate">DateTime to use as a cutoff</param>
         /// <returns>IQueryable of Posts before the given DateTime</returns>
@@ -196,7 +196,7 @@ namespace PostFeed.Services
         }
 
         /// <summary>
-        /// Get an amount of Posts before a given DateTime
+        /// Get an amount of Posts before a given DateTime, sorted in Descending order
         /// </summary>
         /// <param name="amount">amount of Posts to retrieve</param>
         /// <param name="beforeDate">DateTime to use as a cutoff</param>
