@@ -26,6 +26,8 @@ namespace PostFeed.Controllers
         }
 
         // GET: api/Authors/5
+        [HttpGet]
+        [Route("api/Authors/{id}")]
         [ResponseType(typeof(Author))]
         public IHttpActionResult GetAuthor(int id)
         {
@@ -39,6 +41,8 @@ namespace PostFeed.Controllers
         }
 
         // PUT: api/Authors/5
+        [HttpPut]
+        [Route("api/Authors/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAuthor(int id, Author author)
         {
@@ -74,6 +78,8 @@ namespace PostFeed.Controllers
         }
 
         // DELETE: api/Authors/5
+        [HttpDelete]
+        [Route("api/Authors/{id}")]
         [ResponseType(typeof(Author))]
         public IHttpActionResult DeleteAuthor(int id)
         {
