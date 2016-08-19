@@ -22,49 +22,60 @@ $(document).ready(function () {
         //all tips for modals
         tips = $(".validateTips");
 
+
+    //Gets the Id of the last post in the main pane
     function getLastPostId() {
         return $("#partials-div").children().last().prop("id");
     }
 
+    //Gets the Id of the first post in the main pane
     function getFirstPostId() {
         return $("#partials-div").children().first().prop("id");
     }
 
+    //Removes the button that loads more posts
     function removeNewPostButton() {
         var postButton = $("#more").remove();
     }
 
+
+    //Creates the button that loads the next set of posts at the bottom of the main pane
     function addNewPostButton() {
+        //create and prepare the button element
         var newPostButton = document.createElement("button");
         newPostButton.type = "button";
         newPostButton.className += " btn btn-info";
         newPostButton.style = "width:50%; display: table; margin: 0 auto";
         newPostButton.id = "more";
         newPostButton.innerText = "Load More Posts";
-
+        //The div wraps the button to allow centering instead of left-align
         var buttonDiv = document.createElement("DIV");
         buttonDiv.style += " text-align: center";
         buttonDiv.appendChild(newPostButton);
-
+        //attach it to a jQuery object and hide the element
         var buttonJQuery = jQuery(buttonDiv);
         buttonJQuery.hide();
-
+        //get the div the button belongs in and add the button div to it
         partialSection = $("#button-div");
         partialSection.append(buttonJQuery);
+        //make the button load new posts when clicked
         buttonJQuery.click(function () {
             getNextPartialsSincePost(getLastPostId(), 10);
         });
-
+        //reveal the button with animation
         buttonJQuery.show(1500);
     }
 
+    //recreate the values in the Author dropdown for the new post modal
     function populateAuthorsList(){
         $.ajax({
             type: "GET",
             url: '/api/Authors',
             cache: false,
             success: function (response) {
+                //allAuthors should now contain a collection of Author objects
                 var allAuthors = response;
+                //Names and Ids of all author objects in parallel arrays
                 var authorNames = [];
                 var authorIds = [];
                 for(var i = 0; i< allAuthors.length; i++){
@@ -145,8 +156,6 @@ $(document).ready(function () {
     }
 
     function addPartialToSection(partialView, end){
-        //responseDiv = document.createElement("div");
-        //responseDiv.innerHTML = partialView;
         responseJQuery = jQuery(partialView);
         responseJQuery.hide();
 
