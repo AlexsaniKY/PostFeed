@@ -82,10 +82,11 @@ $(document).ready(function () {
                     authorNames.push(allAuthors[i].Name);
                     authorIds.push(allAuthors[i].Id);
                 }
+                //create the select tag
                 var htmlselect = document.createElement('select');
                 htmlselect.name = 'Authors';
                 htmlselect.id = 'nameSelectList';
-
+                //populate the select list with option objects
                 var option;
                 for (var i = 0; i < authorNames.length; i++) {
                     option = document.createElement("option");
@@ -93,6 +94,7 @@ $(document).ready(function () {
                     option.text = authorNames[i];
                     htmlselect.appendChild(option);
                 }
+
                 htmlselect.className += " form-control";
                 var selectionElement = document.getElementById("nameSelect");
                 while (selectionElement.firstChild){
